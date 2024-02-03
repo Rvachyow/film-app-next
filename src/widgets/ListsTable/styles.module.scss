@@ -1,0 +1,38 @@
+.actors {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pagination {
+  li {
+    background-color: #180828;
+  }
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+.item {
+  background-color: #180828;
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.table {
+  div {
+    background-color: #180828;
+    border-radius: 10px;
+  }
+  img {
+    height: 50%;
+    width: 50%;
+  }
+}
+
+.columnItem {
+}

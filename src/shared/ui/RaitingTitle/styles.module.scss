@@ -1,0 +1,41 @@
+.raiting {
+  color: #ae7ede;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.text {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.text__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  position: relative;
+  color: #f3c95a;
+  font-weight: 700;
+  &:after {
+    content: url("../../styles/icons/icon.svg");
+    position: absolute;
+    left: -13px;
+  }
+  &::before {
+    content: url("../../styles/icons/icon.svg");
+    position: absolute;
+    right: -13px;
+    transform: rotateY(180deg);
+  }
+}
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #180828;
+  width: 100%;
+}

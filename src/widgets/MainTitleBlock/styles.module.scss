@@ -1,0 +1,11 @@
+.preview {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
