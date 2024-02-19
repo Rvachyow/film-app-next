@@ -1,4 +1,4 @@
-import { TitlePage } from "~/pages/TitlePage/TitlePage";
+import { TitlePage } from "~/full-page/TitlePage/TitlePage";
 
 export default function Page() {
   return <TitlePage />;
