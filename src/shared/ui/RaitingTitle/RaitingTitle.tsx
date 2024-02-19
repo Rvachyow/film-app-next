@@ -4,9 +4,10 @@ import { Rating } from "~/pages/HomePage/types";
 
 interface IRaitingTitle {
   rating: Rating;
+  top250?: number;
 }
 
-export const RaitingTitle = ({ rating }: IRaitingTitle) => {
+export const RaitingTitle = ({ rating, top250 }: IRaitingTitle) => {
   return (
     <section className={styles.container}>
       <Card
@@ -25,10 +26,12 @@ export const RaitingTitle = ({ rating }: IRaitingTitle) => {
         <div className={styles.card__footer}>
           <div className={styles.text}>
             <h4>{rating.kp.toFixed(1)}</h4>
-            {/* <span className={styles.text__container}>
-              <p>ТОП 250</p>
-              <p>58 МЕСТО</p>
-            </span> */}
+            {top250 ? (
+              <span className={styles.text__container}>
+                <p>ТОП 250</p>
+                <p>{top250} МЕСТО</p>
+              </span>
+            ) : null}
           </div>
         </div>
       </Card>
@@ -41,8 +44,8 @@ export const RaitingTitle = ({ rating }: IRaitingTitle) => {
         <Image
           alt="Woman listing to music"
           className="object-cover"
-          height={400}
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrUWWAfLUqj_HOajtLN4-yeJtl1Y1Kg5gFq09SHNXa9gDHNOnpzUkfZ026AFzR8TjtVow&usqp=CAU"
+          height={200}
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT_bXIwR1CupP12GVQpMOfNPJpKVxwNU56I7jn-sNg9gKzSqzH6AVT8vzWnoCl5nUEfCo&usqp=CAU"
           width={200}
         />
         <div className={styles.card__footer}>

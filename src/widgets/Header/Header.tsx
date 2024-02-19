@@ -5,12 +5,12 @@ import {
   NavbarItem,
   Link,
   Button,
-  Input,
 } from "@nextui-org/react";
+import { SearchTitleHeader } from "../SearchTitleHeader/SearchTitleHeader";
 import { AcmeLogo } from "~/shared/ui/AcmeLogo/AcmeLogo";
-import { SearchIcon } from "~/shared/ui/icons/SearchIcon/SearchIcon";
 import { NavbarItemApp } from "~/shared/ui/NavbarItemApp/NavbarItemApp";
 import { DropDownApp } from "~/shared/ui/DropDownApp/DropDownApp";
+import { Auth } from "../Auth/Auth";
 
 export const Header = () => {
   return (
@@ -31,20 +31,7 @@ export const Header = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Input
-            classNames={{
-              base: "max-w-full sm:max-w-[10rem] h-10",
-              mainWrapper: "h-full",
-              input: "text-small",
-              inputWrapper:
-                "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-            }}
-            color="primary"
-            placeholder="Type to search..."
-            size="sm"
-            startContent={<SearchIcon size={18} />}
-            type="search"
-          />
+          <SearchTitleHeader />
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">
           <Link href="/huy">Login</Link>
@@ -53,6 +40,7 @@ export const Header = () => {
           <Button as={Link} color="primary" href="#" variant="shadow">
             Sign Up
           </Button>
+          <Auth></Auth>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

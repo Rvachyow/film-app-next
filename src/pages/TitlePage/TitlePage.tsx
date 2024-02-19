@@ -1,13 +1,13 @@
 "use client";
+import { useEffect, useState } from "react";
 import { AboutTitle } from "~/widgets/AboutTitle/AboutTitle";
 import { ActorsTable } from "~/widgets/ActorsTable/ActorsTable";
 import { getTitle } from "./ServerActions";
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-
-import styles from "./styles.module.scss";
 import { ITITLE_DATA } from "./types";
 import { TitleCarousel } from "~/widgets/TitleCarousel/TitleCarousel";
+
+import styles from "./styles.module.scss";
 
 export const TitlePage = () => {
   const [dataTitle, setDataTitle] = useState<ITITLE_DATA>();
@@ -32,7 +32,7 @@ export const TitlePage = () => {
   return (
     <main className={styles.titlePage}>
       <AboutTitle dataTitle={dataTitle} />
-      <TitleCarousel dataSimilarMovies={dataTitle.similarMovies}/>
+      <TitleCarousel dataSimilarMovies={dataTitle.similarMovies} />
       <ActorsTable dataActors={dataActors} />
     </main>
   );

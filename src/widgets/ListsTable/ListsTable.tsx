@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import {
   Table,
   TableHeader,
@@ -21,10 +21,13 @@ import { PlusIcon } from "~/shared/ui/icons/SearchIcon/PlusIcon";
 import { VerticalDotsIcon } from "~/shared/ui/icons/SearchIcon/VerticalDotsIcon";
 import { SearchIcon } from "~/shared/ui/icons/SearchIcon/SearchIcon";
 import { ChevronDownIcon } from "~/shared/ui/icons/SearchIcon/ChevronDownIcon";
-import { columns, users, statusOptions } from "./data";
+import { columns, statusOptions } from "./data";
 import { capitalize } from "~/shared/lib/capitalize";
-
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
+import { getList } from "~/pages/ListsPage/ServerActions";
+import { IList } from "~/pages/ListsPage/types";
 
 const statusColorMap = {
   active: "success",
@@ -35,13 +38,16 @@ const statusColorMap = {
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
 
 export const ListsTable = () => {
+  const { id } = useParams();
+  const router = useRouter();
+  const [dataList, setDataList] = useState<IList[]>([]);
   const [filterValue, setFilterValue] = useState("");
   const [selectedKeys, setSelectedKeys] = useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = useState(
     new Set(INITIAL_VISIBLE_COLUMNS)
   );
   const [statusFilter, setStatusFilter] = useState("all");
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState({
     column: "age",
     direction: "ascending",
@@ -49,6 +55,21 @@ export const ListsTable = () => {
   const [page, setPage] = useState(1);
 
   const hasSearchFilter = Boolean(filterValue);
+
+  const handleRoute = (id: number) => {
+    router.push(`/title/${id}`);
+  };
+  const getDataList = async (param: string) => {
+    const getData = await getList(param);
+    if (getData) {
+      setDataList(getData);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    getDataList(id);
+  }, [id]);
 
   const headerColumns = useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -59,7 +80,7 @@ export const ListsTable = () => {
   }, [visibleColumns]);
 
   const filteredItems = useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredUsers = [...dataList];
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
@@ -76,7 +97,7 @@ export const ListsTable = () => {
     }
 
     return filteredUsers;
-  }, [users, filterValue, statusFilter]);
+  }, [dataList, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -88,14 +109,14 @@ export const ListsTable = () => {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a, b) => {
+    return [...dataList].sort((a, b) => {
       const first = a[sortDescriptor.column];
       const second = b[sortDescriptor.column];
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
-  }, [sortDescriptor, items]);
+  }, [sortDescriptor, dataList]);
 
   const renderCell = useCallback((user, columnKey) => {
     const cellValue = user[columnKey];
@@ -266,7 +287,7 @@ export const ListsTable = () => {
     statusFilter,
     visibleColumns,
     onRowsPerPageChange,
-    users.length,
+    dataList.length,
     onSearchChange,
     hasSearchFilter,
   ]);
@@ -318,11 +339,9 @@ export const ListsTable = () => {
           wrapper: "max-h-[382px]",
         }}
         selectedKeys={selectedKeys}
-      
         //@ts-ignore
         sortDescriptor={sortDescriptor}
         topContent={topContent}
-      
         //@ts-ignore
         onSelectionChange={setSelectedKeys}
         //@ts-ignore
@@ -339,20 +358,36 @@ export const ListsTable = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={"No users found"} items={sortedItems}>
+        <TableBody emptyContent={"No titles found"} items={items}>
           {(item) => (
-            <TableRow key={item.name}>
+            <TableRow
+              style={{ cursor: "pointer" }}
+              onClick={() => handleRoute(item.id)}
+              key={item.name}
+            >
+              <TableCell>{item.top250}</TableCell>
               <TableCell>
-                <img
-                  src="https://images.thevoicemag.ru/upload/img_cache/63e/63e7168b3fa1cb8c8b30903f44f0b6cd_cropped_308x411.jpg"
-                  alt=""
-                  width={50}
-                  height={50}
-                />
+                <div className={styles.item__img}>
+                  <img
+                    className={styles.item__img}
+                    src={item.poster.url}
+                    alt=""
+                  />
+                </div>
               </TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.name}</TableCell>
+              <TableCell>
+                {item.name} ({item.year})
+              </TableCell>
+              <TableCell>
+                {item.countries.map((item) => (
+                  <p>{item.name}</p>
+                ))}
+                <span className={styles.textcontainer}>
+                  {item.genres.map((item) => (
+                    <p>{item.name}</p>
+                  ))}
+                </span>
+              </TableCell>
             </TableRow>
           )}
         </TableBody>

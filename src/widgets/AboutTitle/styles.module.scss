@@ -12,7 +12,7 @@
     font-size: 2rem;
   }
   h4 {
-    color: #FF71D7;
+    color: #ff71d7;
     font-size: 1.3rem;
   }
 }
@@ -32,5 +32,13 @@
   gap: 15px;
   h4 {
     color: #ff71d7;
+  }
+}
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  iframe {
+    max-width: 240px;
   }
 }

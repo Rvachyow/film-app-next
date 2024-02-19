@@ -6,10 +6,15 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 import { NavBarItem } from "~/shared/constant/items";
 
 export const DropDownApp = () => {
+  const route = useRouter();
+  const handleRoute = (id: string) => {
+    route.push(`/lists/${id}`);
+  };
   return (
     <Dropdown
       classNames={{
@@ -23,8 +28,12 @@ export const DropDownApp = () => {
       </DropdownTrigger>
       <DropdownMenu aria-label="Navigation">
         {NavBarItem.map((item) => (
-          <DropdownItem color="primary" key={item.id}>
-            <Link style={{color:"white"}} color="secondary" href={`/lists/${item.url}`}>{item.text}</Link>
+          <DropdownItem
+            onClick={() => handleRoute(item.url)}
+            color="primary"
+            key={item.id}
+          >
+            {item.text}
           </DropdownItem>
         ))}
       </DropdownMenu>

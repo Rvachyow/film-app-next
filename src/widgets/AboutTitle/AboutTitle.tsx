@@ -1,9 +1,7 @@
 "use client";
 import { Image } from "@nextui-org/react";
-
 import { RaitingTitle } from "~/shared/ui/RaitingTitle/RaitingTitle";
 import { TitleTable } from "../TitleTable/TitleTable";
-
 import { ITITLE_DATA } from "~/pages/TitlePage/types";
 import styles from "./styles.module.scss";
 
@@ -20,17 +18,24 @@ export const AboutTitle = ({ dataTitle }: IAboutTitle) => {
     poster,
     rating,
     description,
+    videos,
+    top250,
   } = dataTitle;
   return (
     <>
       <section className={styles.container}>
-        <div>
-          <Image
-            isBlurred
-            width={240}
-            src={poster.url}
-            alt="NextUI Album Cover"
-          />
+        <div className={styles.media}>
+          <div>
+            <Image
+              isBlurred
+              width={240}
+              src={poster.url}
+              alt="NextUI Album Cover"
+            />
+          </div>
+          {videos.trailers.slice(0, 1).map((video) => (
+            <iframe key={video.name} src={video.url}></iframe>
+          ))}
         </div>
         <div className={styles.main}>
           <h3>
@@ -44,7 +49,7 @@ export const AboutTitle = ({ dataTitle }: IAboutTitle) => {
             <TitleTable dataTitle={dataTitle} />
           </div>
         </div>
-        <RaitingTitle rating={rating} />
+        <RaitingTitle top250={top250} rating={rating} />
       </section>
       <div className={styles.description}>
         <h4>Описание</h4>

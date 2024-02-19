@@ -2,7 +2,7 @@ export const NavBarItem = [
   {
     id: 1,
     text: "Топ 250 фильмов",
-    url: "top250film",
+    url: "top250",
   },
   {
     id: 2,

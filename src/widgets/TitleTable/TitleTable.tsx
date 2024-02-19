@@ -11,6 +11,7 @@ import styles from "./styles.module.scss";
 import { ITITLE_DATA } from "~/pages/TitlePage/types";
 import { prettyLongNumber } from "~/shared/lib/prettyLongNumber";
 import { prettyDate } from "~/shared/lib/prettyDate";
+import { professionFinder } from "~/shared/lib/professionFinder";
 
 interface ITileTable {
   dataTitle: ITITLE_DATA;
@@ -33,24 +34,12 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
     distributors,
   } = dataTitle;
 
-  const director = persons.find(
-    (persons) => persons.enProfession === "director"
-  );
-  const writer = persons.filter((persons) => persons.enProfession === "writer");
-
-  const composer = persons.filter(
-    (persons) => persons.enProfession === "composer"
-  );
-
-  const producer = persons.filter(
-    (persons) => persons.enProfession === "producer"
-  );
-
-  const designer = persons.filter(
-    (persons) => persons.enProfession === "designer"
-  );
-
-  const editor = persons.filter((persons) => persons.enProfession === "editor");
+  const director = professionFinder(persons, "director");
+  const writer = professionFinder(persons, "writer");
+  const composer = professionFinder(persons, "composer");
+  const producer = professionFinder(persons, "producer");
+  const designer = professionFinder(persons, "designer");
+  const editor = professionFinder(persons, "editor");
 
   return (
     <div className={styles.table}>
@@ -77,7 +66,7 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>
               <div className={styles.table__list}>
                 {countries.map((countries) => (
-                  <p>{countries.name}</p>
+                  <p key={countries.name}>{countries.name}</p>
                 ))}
               </div>
             </TableCell>
@@ -87,25 +76,33 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>
               <div className={styles.table__list}>
                 {genres.map((genres) => (
-                  <p>{genres.name}</p>
+                  <p key={genres.name}>{genres.name}</p>
                 ))}
               </div>
             </TableCell>
           </TableRow>
           <TableRow key="5">
             <TableCell>Слоган</TableCell>
-            <TableCell><p style={{ color: "#AE7EDE" }}>{slogan}</p></TableCell>
+            <TableCell>
+              <p style={{ color: "#AE7EDE" }}>{slogan}</p>
+            </TableCell>
           </TableRow>
           <TableRow key="6">
             <TableCell>Режиссер</TableCell>
-            <TableCell>{director?.name}</TableCell>
+            <TableCell>
+              <div className={styles.table__list}>
+                {director.map((director) => (
+                  <p key={director.id}> {director.name}</p>
+                ))}
+              </div>
+            </TableCell>
           </TableRow>
           <TableRow key="7">
             <TableCell>Сценарий</TableCell>
             <TableCell>
               <div className={styles.table__list}>
                 {writer.map((writer) => (
-                  <p>{writer.name}</p>
+                  <p key={writer.id}>{writer.name}</p>
                 ))}
               </div>
             </TableCell>
@@ -114,9 +111,11 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>Продюсер</TableCell>
             <TableCell>
               <div className={styles.table__list}>
-                {producer.map((producer) => (
-                  <p>{producer.name}</p>
-                ))}
+                {producer.map((producer) => {
+                  if (producer.name)
+                    return <p key={producer.id}>{producer.name}</p>;
+                  return <p key={producer.id}>{producer.enName}</p>;
+                })}
               </div>
             </TableCell>
           </TableRow>
@@ -125,7 +124,7 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>
               <div className={styles.table__list}>
                 {composer.map((composer) => (
-                  <p>{composer.name}</p>
+                  <p key={composer.id}>{composer.name}</p>
                 ))}
               </div>
             </TableCell>
@@ -135,7 +134,7 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>
               <div className={styles.table__list}>
                 {designer.slice(0, 3).map((designer) => (
-                  <p>{designer.name}</p>
+                  <p key={designer.id}>{designer.name}</p>
                 ))}
               </div>
             </TableCell>
@@ -145,7 +144,7 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>
               <div className={styles.table__list}>
                 {editor.map((editor) => (
-                  <p>{editor.name}</p>
+                  <p key={editor.id}>{editor.name}</p>
                 ))}
               </div>
             </TableCell>
@@ -160,17 +159,20 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
           <TableRow key="13">
             <TableCell>Сборы в США</TableCell>
             <TableCell>
-              {fees.usa.currency}
-              {prettyLongNumber(fees.usa.value)}
+              {fees?.usa?.currency}
+              {prettyLongNumber(fees?.usa?.value)}
             </TableCell>
           </TableRow>
           <TableRow key="14">
             <TableCell>Сборы в мире</TableCell>
             <TableCell>
-              +{fees.usa.currency}
-              {prettyLongNumber(+fees.world.value - +fees.usa.value)} ={" "}
-              {fees.world.currency}
-              {prettyLongNumber(fees.world.value)}
+              {fees.world.value && fees.usa.value
+                ? `+${fees?.usa?.currency}${prettyLongNumber(
+                    +fees?.world.value - +fees?.usa?.value
+                  )} = ${fees?.world?.currency}${prettyLongNumber(
+                    fees?.world?.value
+                  )}`
+                : "-"}
             </TableCell>
           </TableRow>
           <TableRow key="15">
@@ -178,7 +180,7 @@ export const TitleTable = ({ dataTitle }: ITileTable) => {
             <TableCell>
               <div className={styles.table__list}>
                 {audience?.map((audience) => (
-                  <p>
+                  <p key={audience.country}>
                     {audience.country} {prettyLongNumber(audience.count)}
                   </p>
                 ))}
