@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 
 import styles from "./styles.module.scss";
-import { Person } from "~/pages/TitlePage/types";
+import { Person } from "~/full-page/TitlePage/types";
 
 interface IActorsTable {
   dataActors: Person[];

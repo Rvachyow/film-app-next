@@ -3,7 +3,7 @@ import Image from "next/image";
 import useWindowSize from "~/shared/lib/hook/useWindowSize";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
-import { SimilarMovy } from "~/pages/TitlePage/types";
+import { SimilarMovy } from "~/full-page/TitlePage/types";
 
 import imgBtn from "../../shared/assets/svgBtn.svg";
 

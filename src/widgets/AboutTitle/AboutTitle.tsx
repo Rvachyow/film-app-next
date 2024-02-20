@@ -2,7 +2,7 @@
 import { Image } from "@nextui-org/react";
 import { RaitingTitle } from "~/shared/ui/RaitingTitle/RaitingTitle";
 import { TitleTable } from "../TitleTable/TitleTable";
-import { ITITLE_DATA } from "~/pages/TitlePage/types";
+import { ITITLE_DATA } from "~/full-page/TitlePage/types";
 import styles from "./styles.module.scss";
 
 interface IAboutTitle {

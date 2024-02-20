@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 
 import styles from "./styles.module.scss";
-import { ITITLE_DATA } from "~/pages/TitlePage/types";
+import { ITITLE_DATA } from "~/full-page/TitlePage/types";
 import { prettyLongNumber } from "~/shared/lib/prettyLongNumber";
 import { prettyDate } from "~/shared/lib/prettyDate";
 import { professionFinder } from "~/shared/lib/professionFinder";

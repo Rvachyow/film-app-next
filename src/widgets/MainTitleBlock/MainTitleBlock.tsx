@@ -1,6 +1,6 @@
 "use server";
 import { CardApp } from "~/shared/ui/CardApp/CardApp";
-import { getDataListsItem } from "~/pages/HomePage/ServerActions";
+import { getDataListsItem } from "~/full-page/HomePage/ServerActions";
 import styles from "./styles.module.scss";
 
 interface IMainTitleBlock {

@@ -25,9 +25,10 @@ import { columns, statusOptions } from "./data";
 import { capitalize } from "~/shared/lib/capitalize";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { getList } from "~/full-page/ListsPage/ServerActions";
+import { IList } from "~/full-page/ListsPage/types";
+
 import styles from "./styles.module.scss";
-import { getList } from "~/pages/ListsPage/ServerActions";
-import { IList } from "~/pages/ListsPage/types";
 
 const statusColorMap = {
   active: "success",
