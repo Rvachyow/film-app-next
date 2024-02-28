@@ -118,7 +118,7 @@ export interface Budget {
 export interface Fees {
   world: World;
   usa: Usa;
-  russia: Russia: 
+  russia: string;
 }
 
 export interface World {

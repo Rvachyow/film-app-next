@@ -1,9 +1,8 @@
 import { ListsTable } from "~/widgets/ListsTable/ListsTable";
-import styles from "./styles.module.scss";
 
 export const ListsPage = () => {
   return (
-    <main className={styles.lists}>
+    <main className="flex flex-col mt-32 ">
       <ListsTable />
     </main>
   );

@@ -1,4 +1,3 @@
-import styles from "./styles.module.scss";
 export const Footer = () => {
-  return <footer className={styles.footer}></footer>;
+  return <footer className="h-64 w-full bg-purple-950 mt-32"></footer>;
 };

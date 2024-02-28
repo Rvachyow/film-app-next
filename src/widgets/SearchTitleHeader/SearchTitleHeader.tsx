@@ -1,3 +1,4 @@
+"use client";
 import { useState, useCallback } from "react";
 import debounce from "lodash/debounce";
 import { Input } from "@nextui-org/react";
@@ -56,7 +57,7 @@ export const SearchTitleHeader = () => {
         color="primary"
         value={input}
         onChange={handleChangeInput}
-        placeholder="Type to search..."
+        placeholder="Search..."
         size="sm"
         startContent={<SearchIcon size={18} />}
         type="search"

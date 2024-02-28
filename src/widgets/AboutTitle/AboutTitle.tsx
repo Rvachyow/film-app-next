@@ -3,7 +3,6 @@ import { Image } from "@nextui-org/react";
 import { RaitingTitle } from "~/shared/ui/RaitingTitle/RaitingTitle";
 import { TitleTable } from "../TitleTable/TitleTable";
 import { ITITLE_DATA } from "~/full-page/TitlePage/types";
-import styles from "./styles.module.scss";
 
 interface IAboutTitle {
   dataTitle: ITITLE_DATA;
@@ -23,8 +22,8 @@ export const AboutTitle = ({ dataTitle }: IAboutTitle) => {
   } = dataTitle;
   return (
     <>
-      <section className={styles.container}>
-        <div className={styles.media}>
+      <section className="flex justify-between gap-6">
+        <div className="flex flex-col gap-7 ">
           <div>
             <Image
               isBlurred
@@ -34,25 +33,29 @@ export const AboutTitle = ({ dataTitle }: IAboutTitle) => {
             />
           </div>
           {videos.trailers.slice(0, 1).map((video) => (
-            <iframe key={video.name} src={video.url}></iframe>
+            <iframe
+              className="max-w-64"
+              key={video.name}
+              src={video.url}
+            ></iframe>
           ))}
         </div>
-        <div className={styles.main}>
-          <h3>
+        <div className="flex flex-auto flex-col">
+          <h3 className="text-start text-lg">
             {name} ({year})
           </h3>
-          <small style={{ color: "#AE7EDE" }} className="text-default-500">
+          <small className="text-purple-400 text-sm">
             {alternativeName} {ageRating}+
           </small>
-          <div className={styles.main__container}>
-            <h4 className="font-bold text-big">О фильме</h4>
+          <div className="mt-12 flex flex-col gap-4">
+            <h4 className="h4__title">О фильме</h4>
             <TitleTable dataTitle={dataTitle} />
           </div>
         </div>
         <RaitingTitle top250={top250} rating={rating} />
       </section>
-      <div className={styles.description}>
-        <h4>Описание</h4>
+      <div className="w-full flex flex-col items-start mt-32 gap-4">
+        <h4 className="h4__title">Описание</h4>
         <p>{description}</p>
       </div>
     </>

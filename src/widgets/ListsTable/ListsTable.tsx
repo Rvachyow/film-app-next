@@ -26,9 +26,7 @@ import { capitalize } from "~/shared/lib/capitalize";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { getList } from "~/full-page/ListsPage/ServerActions";
-import { IList } from "~/full-page/ListsPage/types";
-
-import styles from "./styles.module.scss";
+import type { IList } from "~/full-page/ListsPage/types";
 
 const statusColorMap = {
   active: "success",
@@ -295,13 +293,20 @@ export const ListsTable = () => {
 
   const bottomContent = useMemo(() => {
     return (
-      <div className={styles.bottom}>
+      <div className="w-full flex items-center justify-between pb-5">
         <Pagination
           isCompact
           showControls
           showShadow
-          className={styles.pagination}
-          color="primary"
+          classNames={{
+            wrapper:
+              "gap-0 overflow-visible h-8 rounded border border-divider bg-secondary",
+            item: "w-8 h-8 text-small rounded-none bg-transparent hover:bg-violet-600",
+            prev: "bg-secondary hover:bg-violet-600",
+            next: "bg-secondary hover:bg-violet-600",
+            ellipsis: "bg-secondary",
+          }}
+          variant="flat"
           page={page}
           total={pages}
           onChange={setPage}
@@ -312,6 +317,7 @@ export const ListsTable = () => {
             size="sm"
             variant="flat"
             onPress={onPreviousPage}
+            color="primary"
           >
             Previous
           </Button>
@@ -320,6 +326,7 @@ export const ListsTable = () => {
             size="sm"
             variant="flat"
             onPress={onNextPage}
+            color="primary"
           >
             Next
           </Button>
@@ -329,16 +336,14 @@ export const ListsTable = () => {
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className={styles.table}>
+    <div>
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         hideHeader
         bottomContent={bottomContent}
-        color="primary"
+        color="secondary"
+        c
         bottomContentPlacement="outside"
-        classNames={{
-          wrapper: "max-h-[382px]",
-        }}
         selectedKeys={selectedKeys}
         //@ts-ignore
         sortDescriptor={sortDescriptor}
@@ -368,12 +373,8 @@ export const ListsTable = () => {
             >
               <TableCell>{item.top250}</TableCell>
               <TableCell>
-                <div className={styles.item__img}>
-                  <img
-                    className={styles.item__img}
-                    src={item.poster.url}
-                    alt=""
-                  />
+                <div className="w-32">
+                  <img src={item.poster.url} alt={item.id} />
                 </div>
               </TableCell>
               <TableCell>
@@ -383,7 +384,7 @@ export const ListsTable = () => {
                 {item.countries.map((item) => (
                   <p>{item.name}</p>
                 ))}
-                <span className={styles.textcontainer}>
+                <span>
                   {item.genres.map((item) => (
                     <p>{item.name}</p>
                   ))}

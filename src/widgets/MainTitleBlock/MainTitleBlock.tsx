@@ -1,7 +1,6 @@
 "use server";
 import { CardApp } from "~/shared/ui/CardApp/CardApp";
 import { getDataListsItem } from "~/full-page/HomePage/ServerActions";
-import styles from "./styles.module.scss";
 
 interface IMainTitleBlock {
   name: string;
@@ -14,9 +13,9 @@ export const MainTitleBlock = async ({ name, slug }: IMainTitleBlock) => {
   if (contentData?.length === 0) return null;
 
   return (
-    <div className={styles.preview}>
+    <div className="mt-32 flex flex-col gap-5">
       <h3>{name}</h3>
-      <div className={styles.cards}>
+      <div className="flex justify-between flex-nowrap">
         {contentData?.map((item) => (
           <CardApp {...item} key={item.id} />
         ))}

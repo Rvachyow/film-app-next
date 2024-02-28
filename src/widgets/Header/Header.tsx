@@ -15,7 +15,7 @@ import { Auth } from "../Auth/Auth";
 export const Header = () => {
   return (
     <Navbar
-      style={{ backgroundColor: "#180828" }}
+      className="bg-purple-950"
       shouldHideOnScroll
       maxWidth="xl"
     >
@@ -33,13 +33,13 @@ export const Header = () => {
         <NavbarItem>
           <SearchTitleHeader />
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
+        {/* <NavbarItem className="hidden lg:flex">
           <Link href="/huy">Login</Link>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="shadow">
+          {/* <Button as={Link} color="primary" href="#" variant="shadow">
             Sign Up
-          </Button>
+          </Button> */}
           <Auth></Auth>
         </NavbarItem>
       </NavbarContent>

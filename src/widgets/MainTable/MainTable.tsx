@@ -7,23 +7,18 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
-import styles from "./styles.module.scss";
 
 export const MainTable = () => {
   return (
-    <div className={styles.table}>
+    <div className="min-w-fit">
       <h3>Box office receipts for the weekend</h3>
       <Table removeWrapper>
         <TableHeader>
-          <TableColumn style={{ backgroundColor: "#9353D3", color: "white" }}>
-            NAME
-          </TableColumn>
-          <TableColumn style={{ backgroundColor: "#9353D3", color: "white" }}>
+          <TableColumn className="bg-purple-500 text-white">NAME</TableColumn>
+          <TableColumn className="bg-purple-500 text-white">
             COUNTRY
           </TableColumn>
-          <TableColumn style={{ backgroundColor: "#9353D3", color: "white" }}>
-            COUNT
-          </TableColumn>
+          <TableColumn className="bg-purple-500 text-white">COUNT</TableColumn>
         </TableHeader>
         <TableBody>
           <TableRow key="2">

@@ -4,10 +4,8 @@ import { AboutTitle } from "~/widgets/AboutTitle/AboutTitle";
 import { ActorsTable } from "~/widgets/ActorsTable/ActorsTable";
 import { getTitle } from "./ServerActions";
 import { useParams } from "next/navigation";
-import { ITITLE_DATA } from "./types";
+import type { ITITLE_DATA } from "./types";
 import { TitleCarousel } from "~/widgets/TitleCarousel/TitleCarousel";
-
-import styles from "./styles.module.scss";
 
 export const TitlePage = () => {
   const [dataTitle, setDataTitle] = useState<ITITLE_DATA>();
@@ -28,9 +26,10 @@ export const TitlePage = () => {
   }, [id]);
 
   if (!dataTitle) return null;
+  if (!dataActors) return null;
 
   return (
-    <main className={styles.titlePage}>
+    <main className="flex flex-col mt-32">
       <AboutTitle dataTitle={dataTitle} />
       <TitleCarousel dataSimilarMovies={dataTitle.similarMovies} />
       <ActorsTable dataActors={dataActors} />

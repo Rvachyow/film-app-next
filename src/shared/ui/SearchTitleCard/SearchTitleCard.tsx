@@ -1,7 +1,5 @@
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { ISearchTitleItem } from "~/widgets/SearchTitleHeader/types";
-
-import styles from "./styles.module.scss";
 import { sliceLongString } from "~/shared/lib/sliceLongString";
 import Link from "next/link";
 
@@ -32,7 +30,7 @@ export const SearchTitleCard = ({ dataTitle, handleClearData }: ISearchTitleCard
             radius="lg"
             size="sm"
           >
-            <p className={styles.text}>{sliceLongString(name)}</p>
+            <p>{sliceLongString(name)}</p>
           </Button>
         </CardFooter>
       </Card>

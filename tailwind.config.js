@@ -3,8 +3,7 @@ const { nextui } = require("@nextui-org/react");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html",
-    "./*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -19,6 +18,13 @@ module.exports = {
           colors: {
             background: "#0D001A",
             foreground: "#ffffff",
+            // overlay: "red",
+            divider: "#3B096C",
+            content1: "#520F83",
+            content2: "#520F83",
+            content3: "#520F83",
+            focus: "red",
+            content4: "#520F83",
             primary: {
               50: "#3B096C",
               100: "#520F83",
