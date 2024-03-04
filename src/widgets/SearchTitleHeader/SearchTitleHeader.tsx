@@ -5,9 +5,7 @@ import { Input } from "@nextui-org/react";
 import { SearchIcon } from "~/shared/ui/icons/SearchIcon/SearchIcon";
 import { SearchTitleCard } from "~/shared/ui/SearchTitleCard/SearchTitleCard";
 import { getSearchTitle } from "./ServerActions";
-import { ISearchTitleItem } from "./types";
-
-import styles from "./styles.module.scss";
+import type { ISearchTitleItem } from "./types";
 
 export const SearchTitleHeader = () => {
   const [input, setInput] = useState("");
@@ -45,7 +43,7 @@ export const SearchTitleHeader = () => {
   );
 
   return (
-    <div className={styles.searchtitleheader}>
+    <div className="relative">
       <Input
         classNames={{
           base: "max-w-full sm:max-w-[10rem] h-10",
@@ -63,7 +61,7 @@ export const SearchTitleHeader = () => {
         type="search"
         onClear={handleClearData}
       />
-      <div className={styles.searchtitleheader__card}>
+      <div className="absolute flex flex-wrap flex-col">
         {dataTitle?.map((title) => (
           <SearchTitleCard
             key={title.id}

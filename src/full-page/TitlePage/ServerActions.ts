@@ -1,10 +1,10 @@
 "use server";
-import axios from "../../shared/api/axios";
+import { filmInstans } from "../../shared/api/axiosServer";
 import { ITITLE_DATA } from "./types";
 
 export const getTitle = async (id: number) => {
   try {
-    const { data } = await axios.get<ITITLE_DATA>(`movie/${id}`);
+    const { data } = await filmInstans.get<ITITLE_DATA>(`movie/${id}`);
     return data;
   } catch (error) {
     console.log(error);

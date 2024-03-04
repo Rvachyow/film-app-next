@@ -1,10 +1,10 @@
 "use server";
-import axios from "../../shared/api/axios";
+import { filmInstans } from "../../shared/api/axiosServer";
 import { IDataListsItem, IGetLists } from "./types";
 
 export async function getDataListsItem(slug: string) {
   try {
-    const { data } = await axios.get<IDataListsItem>(
+    const { data } = await filmInstans.get<IDataListsItem>(
       `movie?page=1&limit=4&lists=${slug}`
     );
 
@@ -16,7 +16,7 @@ export async function getDataListsItem(slug: string) {
 
 export async function getLists() {
   try {
-    const { data } = await axios.get<IGetLists>(
+    const { data } = await filmInstans.get<IGetLists>(
       "list?page=1&limit=10&slug=%21top250"
     );
     return data.docs;

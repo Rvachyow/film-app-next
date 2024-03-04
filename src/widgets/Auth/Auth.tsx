@@ -10,11 +10,16 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { login } from "./ServerActions";
 
 export const Auth = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isActive, setIsActive] = useState(false);
   const route = useRouter();
+
+  // const handleLogin = () => {
+  //   login()
+  // }
 
   const handleOpenModal = () => {
     route.push("/?auth");
@@ -53,7 +58,9 @@ export const Auth = () => {
               >
                 Modal Title
               </ModalHeader>
-              <ModalBody></ModalBody>
+              <ModalBody>
+                <input type="text" />
+              </ModalBody>
               <ModalFooter>
                 <Button variant="light" onPress={onClose}>
                   Close
@@ -61,6 +68,7 @@ export const Auth = () => {
                 <Button
                   className="bg-[#6f4ef2] shadow-lg shadow-indigo-500/20"
                   onPress={onClose}
+                  onClick={() => login()}
                 >
                   Action
                 </Button>

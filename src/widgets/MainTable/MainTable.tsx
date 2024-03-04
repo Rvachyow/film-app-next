@@ -12,7 +12,7 @@ export const MainTable = () => {
   return (
     <div className="min-w-fit">
       <h3>Box office receipts for the weekend</h3>
-      <Table removeWrapper>
+      {/* <Table removeWrapper>
         <TableHeader>
           <TableColumn className="bg-purple-500 text-white">NAME</TableColumn>
           <TableColumn className="bg-purple-500 text-white">
@@ -37,7 +37,7 @@ export const MainTable = () => {
             <TableCell>0,5 m</TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table> */}
     </div>
   );
 };

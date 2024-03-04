@@ -1,5 +1,5 @@
 "use server";
-import axios from "../../shared/api/axios";
+import axios from "../../shared/api/axiosServer";
 import { ISearchTitle } from "./types";
 
 export const getSearchTitle = async (filmName: string) => {

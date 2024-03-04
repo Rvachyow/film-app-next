@@ -1,10 +1,10 @@
 "use server";
-import axios from "../../shared/api/axios";
+import { filmInstans } from "../../shared/api/axiosServer";
 import { IListData } from "./types";
 
 export const getList = async (id: string) => {
   try {
-    const { data } = await axios.get<IListData>(
+    const { data } = await filmInstans.get<IListData>(
       `/movie?page=1&limit=250&lists=${id}`
     );
     const filterData = data.docs.filter((item) => item.top250);
