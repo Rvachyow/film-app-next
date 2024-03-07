@@ -20,14 +20,14 @@ export const TitleCarousel = ({ dataSimilarMovies }: ITitleCaruousel) => {
   const lengthData = refImg.current?.clientWidth * dataSimilarMovies.length;
 
   const swithHandlerRight = () => {
-    if (transform - refImg.current.clientWidth * 7 < -lengthData) {
+    if (transform - refImg.current?.clientWidth * 7 < -lengthData) {
       setTransform(0);
-    } else setTransform((prev) => prev - refImg.current.clientWidth * 2);
+    } else setTransform((prev) => prev - refImg.current?.clientWidth * 2);
   };
   const swithHandlerLeft = () => {
-    if (transform + refImg.current.clientWidth >= 0) {
-      setTransform(-lengthData + refImg.current.clientWidth * 6);
-    } else setTransform((prev) => prev + refImg.current.clientWidth * 2);
+    if (transform + refImg.current?.clientWidth >= 0) {
+      setTransform(-lengthData + refImg.current?.clientWidth * 6);
+    } else setTransform((prev) => prev + refImg.current?.clientWidth * 2);
   };
 
   const handleNavigate = (id: number) => {

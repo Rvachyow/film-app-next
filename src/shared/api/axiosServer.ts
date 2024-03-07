@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-export const filmInstans = axios.create({
+export const filmInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_HOST_NAME,
   withCredentials: true,
   headers: {
@@ -10,12 +10,12 @@ export const filmInstans = axios.create({
   },
 });
 
-export const authInstans = axios.create({
+export const authInstance = axios.create({
   baseURL: "http://localhost:5000/auth/",
   withCredentials: true,
 });
 
-authInstans.interceptors.request.use((config: any) => {
+authInstance.interceptors.request.use((config: any) => {
   // config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
   return config;
 });
